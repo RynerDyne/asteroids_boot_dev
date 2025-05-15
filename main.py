@@ -1,16 +1,28 @@
+#todo:  Add a scoring system
+## Whenever an asteroid is destroyed, a counter at the corner of the screen is added to.
+### First is to add a number to the corner of the screen; then adding to it should be easy.
+# in order to display I'll:
+## import pygame.freetype (as this module isn't included in the import pygame)
+## create a pygame.freetype.Font('font location(or None)', fontSize)
+## display test in game loop with test.render_to(screen, coordinates, 'test word', "color")
+
 import sys
 import pygame
+import pygame.freetype
 
 from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
 from shot import Shot
-import shot
 
 def main():
     pygame.init()
+
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock = pygame.time.Clock()
+    dt = 0
+    test = pygame.freetype.Font(None, 30)
 
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -24,9 +36,6 @@ def main():
 
     player_triangle = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
     asteroid_field = AsteroidField()
-
-    clock = pygame.time.Clock()
-    dt = 0
 
     while True:
         for event in pygame.event.get():
@@ -50,6 +59,8 @@ def main():
 
         for to_draw in drawable:
             to_draw.draw(screen)
+
+        pygame.freetype.Font('font location(or None)', fontSize)
 
         pygame.display.flip()
 

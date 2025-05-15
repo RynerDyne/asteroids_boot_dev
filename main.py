@@ -6,6 +6,7 @@ from player import *
 from asteroid import *
 from asteroidfield import *
 from shot import Shot
+import shot
 
 def main():
     pygame.init()
@@ -38,6 +39,12 @@ def main():
             if obj.collision_check(player_triangle):
                 print("Game over!")
                 sys.exit()
+
+        for asteroid in asteroids:
+            for bullet in shots:
+                if bullet.collision_check(asteroid):
+                    bullet.kill()
+                    asteroid.split()
 
         screen.fill("black")
 

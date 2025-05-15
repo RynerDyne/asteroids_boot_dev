@@ -7,8 +7,8 @@ The guided project has been completed.  The following is suggested for personal 
 
 
 Possible improvments:
- Add a scoring system
- Implement multiple lives and respawning
+--- Add a scoring system ---
+todo: Implement multiple lives and respawning
  Add an explosion effect for the asteroids
  Add acceleration to the player movement
  Make the objects wrap around the screen instead of disappearing

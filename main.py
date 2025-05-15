@@ -1,10 +1,4 @@
-#todo:  Add a scoring system
-## Whenever an asteroid is destroyed, a counter at the corner of the screen is added to.
-### First is to add a number to the corner of the screen; then adding to it should be easy.
-# in order to display I'll:
-## import pygame.freetype (as this module isn't included in the import pygame)
-## create a pygame.freetype.Font('font location(or None)', fontSize)
-## display test in game loop with test.render_to(screen, coordinates, 'test word', "color")
+# todo: Implement multiple lives and respawning
 
 import sys
 import pygame
@@ -14,6 +8,7 @@ from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
+from scoreboard import Scoreboard
 from shot import Shot
 
 def main():
@@ -22,7 +17,6 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
-    test = pygame.freetype.Font(None, 30)
 
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -33,9 +27,11 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, updatable, drawable)
+    Scoreboard.containers = (drawable)
 
     player_triangle = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
     asteroid_field = AsteroidField()
+    score = Scoreboard((SCREEN_WIDTH / 2), 5)
 
     while True:
         for event in pygame.event.get():
@@ -54,13 +50,12 @@ def main():
                 if bullet.collision_check(asteroid):
                     bullet.kill()
                     asteroid.split()
+                    score.score_increase()
 
         screen.fill("black")
 
         for to_draw in drawable:
             to_draw.draw(screen)
-
-        pygame.freetype.Font('font location(or None)', fontSize)
 
         pygame.display.flip()
 
